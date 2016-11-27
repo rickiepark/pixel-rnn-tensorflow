@@ -73,8 +73,8 @@ def main(_):
 
     height, width, channel = 28, 28, 1
 
-    train_step_per_epoch = mnist.train.num_examples / conf.batch_size
-    test_step_per_epoch = mnist.test.num_examples / conf.batch_size
+    train_step_per_epoch = int(mnist.train.num_examples / conf.batch_size)
+    test_step_per_epoch = int(mnist.test.num_examples / conf.batch_size)
   elif conf.data == "cifar":
     from cifar10 import IMAGE_SIZE, inputs
 
@@ -99,7 +99,7 @@ def main(_):
       for epoch in iterator:
         # 1. train
         total_train_costs = []
-        for idx in xrange(train_step_per_epoch):
+        for idx in range(train_step_per_epoch):
           images = binarize(next_train_batch(conf.batch_size)) \
             .reshape([conf.batch_size, height, width, channel])
 
@@ -108,7 +108,7 @@ def main(_):
         
         # 2. test
         total_test_costs = []
-        for idx in xrange(test_step_per_epoch):
+        for idx in range(test_step_per_epoch):
           images = binarize(next_test_batch(conf.batch_size)) \
             .reshape([conf.batch_size, height, width, channel])
 
@@ -125,7 +125,7 @@ def main(_):
             directory=SAMPLE_DIR, prefix="epoch_%s" % epoch)
 
         iterator.set_description("train l: %.3f, test l: %.3f" % (avg_train_cost, avg_test_cost))
-        print
+        # print
     else:
       logger.info("Image generation starts!")
 
