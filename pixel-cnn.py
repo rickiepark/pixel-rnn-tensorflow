@@ -60,7 +60,7 @@ for i in range(recurrent_length):
     hidden_layer.append(conv2d(hidden_layer[-1], hidden_dims, [3, 3], "B", scope='conv_B_%d' % i))
 
 for i in range(out_recurrent_length):
-    hidden_layer.append(tf.nn.relu(conv2d(hidden_layer[-1], out_hidden_dims, [3, 3], "B", scope='relu_B_%d' % i)))
+    hidden_layer.append(tf.nn.relu(conv2d(hidden_layer[-1], out_hidden_dims, [1, 1], "B", scope='relu_B_%d' % i)))
 
 y_logits = conv2d(hidden_layer[-1], 1, [1, 1], "B", scope='y_logits')
 y_ = tf.nn.sigmoid(y_logits)
